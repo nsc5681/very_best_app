@@ -1,0 +1,18 @@
+<%= form_with(model: @favorite, local: true) do |f| %>
+
+  <%= f.hidden_field :user_id, value: @user.id %>
+
+  <div class="form-group">
+    <%= f.label :dish_id %>
+
+    <%= f.collection_select :dish_id, Dish.all, :id, :to_s, {}, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :restaurant_id %>
+
+    <%= f.collection_select :restaurant_id, Restaurant.all, :id, :to_s, {}, class: "form-control" %>
+  </div>
+
+  <%= f.submit "Create favorite", class: "btn btn-block btn-outline-secondary" %>
+<% end %>

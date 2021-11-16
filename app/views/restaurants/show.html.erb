@@ -1,0 +1,17 @@
+<div class="row justify-content-center mb-3">
+  <div class="col-md-8">
+    <%= render object: @restaurant, partial: "card", as: :restaurant %>
+  </div>
+</div>
+
+<div class="row justify-content-center mb-3">
+  <div class="col-md-8">
+    <%= render partial: "restaurants/restaurant_favorite_dishes" %>
+  </div>
+</div>
+
+<div class="row justify-content-center mb-3">
+  <div class="col-md-8">
+    <%= render partial: "restaurants/restaurant_dishes" %>
+  </div>
+</div>

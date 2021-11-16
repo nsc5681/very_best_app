@@ -1,0 +1,50 @@
+<% was_validated = favorite.errors.any? %>
+
+<%= form_with(model: favorite, local: true, novalidate: true, class: "mb-3") do |f| %>
+  <%= f.hidden_field :user_id, value: current_user.id %>
+  <div class="form-group">
+    <% dish_class = "form-control" %>
+    <% dish_was_invalid = favorite.errors.include?(:dish) %>
+
+    <% if was_validated %>
+      <% if dish_was_invalid %>
+        <% dish_class << " is-invalid" %>
+      <% else %>
+        <% dish_class << " is-valid" %>
+      <% end %>
+    <% end %>
+
+    <%= f.label :dish_id %>
+    <%= f.collection_select :dish_id, Dish.all, :id, :to_s, {}, class: "form-control" %>
+    <% if dish_was_invalid %>
+      <% favorite.errors.full_messages_for(:dish).each do |message| %>
+        <div class="invalid-feedback d-flex">
+          <%= message %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="form-group">
+    <% restaurant_class = "form-control" %>
+    <% restaurant_was_invalid = favorite.errors.include?(:restaurant) %>
+
+    <% if was_validated %>
+      <% if restaurant_was_invalid %>
+        <% restaurant_class << " is-invalid" %>
+      <% else %>
+        <% restaurant_class << " is-valid" %>
+      <% end %>
+    <% end %>
+
+    <%= f.label :restaurant_id %>
+    <%= f.collection_select :restaurant_id, Restaurant.all, :id, :to_s, {}, class: "form-control" %>
+    <% if restaurant_was_invalid %>
+      <% favorite.errors.full_messages_for(:restaurant).each do |message| %>
+        <div class="invalid-feedback d-flex">
+          <%= message %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+  <%= f.button class: "btn btn-outline-secondary btn-block" %>
+<% end %>

@@ -1,0 +1,12 @@
+<%= form_with(model: @dish, local: true) do |f| %>
+
+  <div class="form-group">
+    <%= f.label :meal_type %>
+
+    <%= f.text_field :meal_type, class: "form-control" %>
+  </div>
+
+  <%= f.hidden_field :cuisine_id, value: @cuisine.id %>
+
+  <%= f.submit "Create dish", class: "btn btn-block btn-outline-secondary" %>
+<% end %>
